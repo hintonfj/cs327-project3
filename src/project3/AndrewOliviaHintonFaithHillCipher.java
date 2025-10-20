@@ -2,7 +2,15 @@ package project3;
 
 import java.math.BigInteger;
 
-
+/**
+ * Utilize Hill Cipher to encrypt and decrypt.
+ * 
+ * @author: Faith Hinton
+ * @author: Olivia Andrew
+ * @date: 10/20/25
+ * “This work complies with the JMU honor code. I did not give or receive unauthorized help on this assignment.”
+ * 
+ */
 class AndrewOliviaHintonFaithHillCipher{
 
     /**
