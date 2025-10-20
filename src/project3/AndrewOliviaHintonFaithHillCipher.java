@@ -17,7 +17,7 @@ class AndrewOliviaHintonFaithHillCipher{
      * Calculate the decryption key from a given encryption key. 
      * EncryptedKey is a given 2 x 2 matrix-based encryption key. 
      */
-    public int[][] findDecryptionKey(int[][] encryptionKey){
+    public static int[][] findDecryptionKey(int[][] encryptionKey){
         // 2x2 matrix
         int a = encryptionKey[0][0];
         int b = encryptionKey[0][1];
@@ -91,8 +91,23 @@ class AndrewOliviaHintonFaithHillCipher{
      * Decrypt a given multiple-letter ciphertext with a given 2 × 2 decryption key. 
      */
     public static int[] decrypt(int[] ciphertext, int[][] decryptionKey){
-        // TODO
-        return null;
+    	int numChars = ciphertext.length;
+    	int[] decryptedText = new int[numChars];
+    	
+    	// decrypt in pairs
+    	for (int i = 0; i < numChars; i += 2) {
+    		// get current pair (c1 and c2)
+    		int c1 = ciphertext[i];
+    		int c2 = ciphertext[i + 1];
+    		
+    		// 
+    		
+    		
+    	}
+    	
+    	// convert ciphertext into integers
+    	// decrypt one pair at a time
+    	// combine
     }
     public static void main (String[] args) {
         /**
@@ -105,17 +120,19 @@ class AndrewOliviaHintonFaithHillCipher{
          * Please note that this is a new ciphertext and it is not the one that you have generated earlier. You must print out the corresponding cleartext in letters, not in integers.
          */
         int[][] encryptionKey = {{16, 7}, {9, 14}};
+        int[][] decryptionKey = findDecryptionKey(encryptionKey);
 
         //encrypt
         String plaintextStr = "JMUCSISCOOL";
-        int[] plaintext = stringToIntArray(plaintextStr);
-        int[] ciphertext = encrypt(plaintext, encryptionKey);
-        System.out.println("Encrypted plaintext: " + intArrayToString(ciphertext));
+        int[] plaintext1 = stringToIntArray(plaintextStr);
+        int[] ciphertext1 = encrypt(plaintext1, encryptionKey);
+        System.out.println("Encrypted plaintext: " + intArrayToString(ciphertext1));
 
 
         //decrypt
-        // TODO
         String ciphertextStr = "MQGVGQSMJI";
+        int[] ciphertext2 = stringToIntArray(ciphertextStr);
+        int[] plaintext2 = decrypt(ciphertext2, decryptionKey);
         System.out.println("Decrypted text: ");
     }
 
