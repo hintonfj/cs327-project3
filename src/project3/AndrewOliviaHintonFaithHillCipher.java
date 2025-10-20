@@ -5,19 +5,23 @@ import java.math.BigInteger;
 /**
  * Utilize Hill Cipher to encrypt and decrypt.
  * 
- * @author: Faith Hinton
  * @author: Olivia Andrew
+ * @author: Faith Hinton
  * @date: 10/20/25
  * “This work complies with the JMU honor code. I did not give or receive unauthorized help on this assignment.”
  * 
  */
-class AndrewOliviaHintonFaithHillCipher{
+class AndrewOliviaHintonFaithHillCipher
+{
 
-    /**
-     * Calculate the decryption key from a given encryption key. 
-     * EncryptedKey is a given 2 x 2 matrix-based encryption key. 
-     */
-    public static int[][] findDecryptionKey(int[][] encryptionKey){
+	/**
+	 * Calculate the decryption key from a given encryption key. 
+	 * 
+	 * @param encryptionKey -- 2x2 matrix-based encryption key
+	 * @return int[][] -- resulting decryption key
+	 */
+    public static int[][] findDecryptionKey(int[][] encryptionKey)
+    {
         // 2x2 matrix
         int a = encryptionKey[0][0];
         int b = encryptionKey[0][1];
@@ -46,9 +50,35 @@ class AndrewOliviaHintonFaithHillCipher{
     }
 
     /**
-     * Encrypt a given multiple-letter plaintext message with a given 2 × 2 encryption key.
+     * Print the contents of a 2x2 matrix to console.
+     * 
+     * @param matrix2x2 - int[][]
      */
-    public static int[] encrypt(int[] plaintext, int[][] encryptionKey){
+    public static void print2x2Matrix(int[][] matrix) 
+    {
+    	for (int i = 0; i < matrix.length; i++) {
+    		// print one row at a time
+    		System.out.print("[");
+    		for (int j = 0; j < matrix[i].length; j++) {
+    			System.out.print(matrix[i][j]);
+    			if (j != matrix[i].length - 1) {
+    				System.out.print(", ");
+    			}
+    		}
+    		System.out.println("]");
+    	}
+    }
+    
+    
+    /**
+     * Encrypt a given multiple-letter plaintext message using a given 2 × 2 encryption key.
+     * 
+     * @param plaintext
+     * @param encryptionKey
+     * @return int[] -- integer version of ciphertext
+     */
+    public static int[] encrypt(int[] plaintext, int[][] encryptionKey)
+    {
         int n = plaintext.length;
         int[] encryptedText = new int[n];
 
@@ -67,9 +97,13 @@ class AndrewOliviaHintonFaithHillCipher{
     }
 
     /**
-     * Convert string [] to int[].
+     * Convert string to int[].
+     * 
+     * @param text
+     * @return integer array version of String text
      */
-    public static int[] stringToIntArray(String text) {
+    public static int[] stringToIntArray(String text) 
+    {
         text = text.toUpperCase().replaceAll("[^A-Z]", "");
         int[] arr = new int[text.length()];
         for (int i = 0; i < text.length(); i++) {
@@ -80,17 +114,26 @@ class AndrewOliviaHintonFaithHillCipher{
 
     /**
      * Convert int[] to string[].
+     * 
+     * @param arr -- int[]
+     * @return String version of integer array
      */
-    public static String intArrayToString(int[] arr) {
+    public static String intArrayToString(int[] arr) 
+    {
         StringBuilder sb = new StringBuilder();
         for (int i : arr) sb.append((char) (i + 'A'));
         return sb.toString();
     }
 
     /**
-     * Decrypt a given multiple-letter ciphertext with a given 2 × 2 decryption key. 
+     * Decrypt a given multiple-letter ciphertext using the accquired 2x2 decryption key.
+     * 
+     * @param ciphertext
+     * @param decryptionKey
+     * @return int[] -- integer version of plaintext
      */
-    public static int[] decrypt(int[] ciphertext, int[][] decryptionKey){
+    public static int[] decrypt(int[] ciphertext, int[][] decryptionKey)
+    {
     	int numChars = ciphertext.length;
     	int[] decryptedText = new int[numChars];
     	
@@ -100,40 +143,48 @@ class AndrewOliviaHintonFaithHillCipher{
     		int c1 = ciphertext[i];
     		int c2 = ciphertext[i + 1];
     		
-    		// 
-    		
-    		
+    		// compute each pair
+    		decryptedText[i] = (decryptionKey[0][0] * c1 + decryptionKey[0][1] * c2) % 26;
+    		decryptedText[i + 1] = (decryptionKey[1][0] * c1 + decryptionKey[1][1] * c2) % 26;
     	}
-    	
-    	// convert ciphertext into integers
-    	// decrypt one pair at a time
-    	// combine
+    	return decryptedText;
     }
-    public static void main (String[] args) {
-        /**
-         * You must test your above functionalities through the following example:
-         * Encryption key: 16, 7, 9, 14 
-         * You must print out the corresponding decryption key to the console (3 points).
-         *  Plaintext JMUCSISCOOL. Encrypt it with your encrypt() method. Letters are mapped to integers as A → 0, B1,..., Z→ 25.
-         * You must print out the ciphertext in letters, not in integers.
-         *  For ciphertext MQGVGQSMJI, decrypt it with your decrypt() method.
-         * Please note that this is a new ciphertext and it is not the one that you have generated earlier. You must print out the corresponding cleartext in letters, not in integers.
-         */
+    
+    /**
+     * Print results of required unit / integration tests here.
+     * 
+     * @param args
+     */
+    public static void main (String[] args) 
+    {
+    	System.out.println("Project 3: Hill Cipher");
+    	
         int[][] encryptionKey = {{16, 7}, {9, 14}};
-        int[][] decryptionKey = findDecryptionKey(encryptionKey);
 
-        //encrypt
+        // A) decryptionKey
+        System.out.println("\n 3.3.1 A) Testing findDecryptionKey...");
+        int[][] decryptionKey = findDecryptionKey(encryptionKey);
+        System.out.println("Given encryption key: ");
+        print2x2Matrix(encryptionKey);
+        System.out.println("Decryption key: ");
+        print2x2Matrix(decryptionKey);
+        
+        // B) encrypt
+        System.out.println("\n 3.3.1 B) Testing encrypt...");
+        System.out.println("Given plaintext = JMUCSISCOOL");
         String plaintextStr = "JMUCSISCOOL";
         int[] plaintext1 = stringToIntArray(plaintextStr);
         int[] ciphertext1 = encrypt(plaintext1, encryptionKey);
         System.out.println("Encrypted plaintext: " + intArrayToString(ciphertext1));
 
 
-        //decrypt
+        // C) decrypt
+        System.out.println("\n 3.3.1 C) Testing decrypt...");
+        System.out.println("Given ciphertext = MQGVGQSMJI");
         String ciphertextStr = "MQGVGQSMJI";
         int[] ciphertext2 = stringToIntArray(ciphertextStr);
         int[] plaintext2 = decrypt(ciphertext2, decryptionKey);
-        System.out.println("Decrypted text: ");
+        System.out.println("Decrypted text: " + intArrayToString(plaintext2));
     }
 
 }
