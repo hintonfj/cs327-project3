@@ -173,9 +173,9 @@ class AndrewOliviaHintonFaithHillCipher
         System.out.println("\n 3.3.1 B) Testing encrypt...");
         System.out.println("Given plaintext = JMUCSISCOOL");
         String plaintextStr = "JMUCSISCOOL";
-        int[] plaintext1 = stringToIntArray(plaintextStr);
-        int[] ciphertext1 = encrypt(plaintext1, encryptionKey);
-        System.out.println("Encrypted plaintext: " + intArrayToString(ciphertext1));
+        int[] plaintext = stringToIntArray(plaintextStr);
+        int[] ciphertext1 = encrypt(plaintext, encryptionKey);
+        System.out.println("Resulting ciphertext: " + intArrayToString(ciphertext1));
 
 
         // C) decrypt
@@ -183,8 +183,8 @@ class AndrewOliviaHintonFaithHillCipher
         System.out.println("Given ciphertext = MQGVGQSMJI");
         String ciphertextStr = "MQGVGQSMJI";
         int[] ciphertext2 = stringToIntArray(ciphertextStr);
-        int[] plaintext2 = decrypt(ciphertext2, decryptionKey);
-        System.out.println("Decrypted text: " + intArrayToString(plaintext2));
+        int[] cleartext = decrypt(ciphertext2, decryptionKey);
+        System.out.println("Resulting cleartext: " + intArrayToString(cleartext));
     }
 
 }
